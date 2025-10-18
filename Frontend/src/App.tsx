@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
-import { LoginPage } from "./components/LoginPage";
+import { LoginPage } from "./pages/LoginPage";
 import { NetworkMap } from "./components/NetworkMap";
 import { KPICards } from "./components/KPICards";
 import { AIRecommendations } from "./components/AIRecommendations";
 import { ConflictDetection } from "./components/ConflictDetection";
 import { ThroughputChart } from "./components/ThroughputChart";
 import { SimulationPanel } from "./components/SimulationPanel";
-import { PerformanceDashboard } from "./components/PerformanceDashboard";
+import { PerformanceDashboard } from "./pages/PerformanceDashboard";
 import { SettingsPanel } from "./components/SettingsPanel";
 import {
   LayoutDashboard,
   AlertTriangle,
   FlaskConical,
   BarChart3,
+  Map,
   Settings,
   Search,
   Bell,
@@ -24,6 +25,7 @@ import {
   UserCircle,
   Shield,
 } from "lucide-react";
+import NetworkMapPage from "./pages/NetworkMapPage";
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { Badge } from "./components/ui/badge";
@@ -35,8 +37,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./components/ui/dropdown-menu";
+import Sidebar from "./components/Sidebar";
 
-type View = "dashboard" | "conflicts" | "simulation" | "performance" | "settings";
+type View = "dashboard" | "conflicts" | "simulation" | "performance" | "settings" | "networkmap";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -57,6 +60,7 @@ export default function App() {
 
   const navigationItems = [
     { id: "dashboard" as View, label: "Dashboard", icon: LayoutDashboard },
+    { id: "networkmap" as View, label: "Network Map", icon: Map },
     { id: "conflicts" as View, label: "Conflict Resolution", icon: AlertTriangle },
     { id: "simulation" as View, label: "What-If Simulation", icon: FlaskConical },
     { id: "performance" as View, label: "Performance Analytics", icon: BarChart3 },
@@ -64,9 +68,9 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0F1115] dark">
+    <div className="min-h-screen bg-railway-dark-bg dark">
       {/* Top Bar */}
-      <div className="fixed top-0 left-0 right-0 h-16 bg-[#1A1D23] border-b border-white/10 z-50">
+  <div className="fixed top-0 left-0 right-0 h-16 bg-railway-card-bg border-b border-white/10 z-50">
         <div className="h-full px-4 flex items-center justify-between gap-4">
           {/* Left Section */}
           <div className="flex items-center gap-4">
@@ -74,39 +78,39 @@ export default function App() {
               variant="ghost"
               size="icon"
               aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
-              className="lg:hidden bg-[#0F1115] border border-white/10 rounded-lg p-2"
+              className="lg:hidden bg-railway-dark-bg border border-white/10 rounded-lg p-2"
               onClick={() => setSidebarOpen(!sidebarOpen)}
             >
               {sidebarOpen ? <X className="w-5 h-5 text-[#C4C4CC]" /> : <Menu className="w-5 h-5 text-[#C4C4CC]" />}
             </Button>
             
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-gradient-to-br from-[#30475E] to-[#3DBE84] rounded-lg">
-                <Train className="w-6 h-6 text-white" />
+              <div className="brand-badge p-2">
+                <Train className="w-6 h-6 text-[var(--railway-logo-color)]" />
               </div>
               <div className="block">
                 <h1 className="text-lg text-white">MARGDARSHAK</h1>
-                <p className="text-xs text-[#3DBE84]">Section Controller Dashboard</p>
+                <p className="text-xs text-railway-emerald">Section Controller Dashboard</p>
               </div>
             </div>
           </div>
 
           {/* Center Section - Search */}
-          <div className="flex-1 max-w-md hidden md:block">
+              <div className="flex-1 max-w-md hidden md:block">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[#FAFAFA]/50" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-railway-off-white-50" />
               <Input
                 placeholder="Search train ID or section..."
-                className="pl-10 bg-[#0F1115] border-white/10"
+                className="pl-10 bg-railway-dark-bg border-white/10"
               />
             </div>
           </div>
 
           {/* Right Section */}
           <div className="flex items-center gap-4">
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-[#0F1115] border border-white/10 rounded-lg">
-              <div className="w-2 h-2 bg-[#3DBE84] rounded-full animate-pulse" />
-              <span className="text-xs text-[#C4C4CC]">Live Sync</span>
+            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-railway-dark-bg border border-white/10 rounded-lg">
+              <div className="w-2 h-2 bg-[var(--railway-emerald)] rounded-full animate-pulse" />
+              <span className="text-xs text-railway-off-white">Live Sync</span>
             </div>
 
             <div className="hidden sm:block text-right">
@@ -122,10 +126,10 @@ export default function App() {
               variant="ghost"
               size="icon"
               aria-label="Notifications"
-              className="relative bg-[#0F1115] border border-white/10 rounded-lg h-10 w-10 flex items-center justify-center"
+              className="relative bg-railway-dark-bg border border-white/10 rounded-lg h-10 w-10 flex items-center justify-center"
             >
-              <Bell className="w-5 h-5 text-[#C4C4CC]" />
-              <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center bg-[#E63946] text-white text-xs border-none rounded-full">
+              <Bell className="w-5 h-5 text-railway-off-white-60" />
+              <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center bg-[var(--railway-danger)] text-white text-xs border-none rounded-full">
                 3
               </Badge>
             </Button>
@@ -175,54 +179,13 @@ export default function App() {
 
       {/* Main Layout */}
       <div className="pt-16 flex">
-        {/* Sidebar */}
-        <div
-          className={`fixed lg:sticky top-16 left-0 h-[calc(100vh-4rem)] bg-[#1A1D23] border-r border-white/10 transition-transform duration-300 z-40 ${
-            sidebarOpen ? "translate-x-0 w-64" : "-translate-x-full lg:translate-x-0 lg:w-16"
-          } overflow-auto`}
-          aria-hidden={!sidebarOpen}
-        >
-          <nav className="p-4 space-y-2">
-            {navigationItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = currentView === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setCurrentView(item.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
-                    isActive
-                      ? "bg-[#3DBE84]/20 text-[#3DBE84] border border-[#3DBE84]/30"
-                      : "text-[#C4C4CC] hover:bg-[#0F1115] hover:text-white"
-                  }`}
-                >
-                  <Icon className="w-5 h-5 flex-shrink-0" />
-                  {sidebarOpen && <span className="text-sm whitespace-nowrap">{item.label}</span>}
-                  {!sidebarOpen && item.id === "conflicts" && (
-                    <Badge className="absolute left-8 top-2 w-4 h-4 p-0 flex items-center justify-center bg-[#E63946] text-white text-xs border-none">
-                      3
-                    </Badge>
-                  )}
-                </button>
-              );
-            })}
-          </nav>
-
-          {sidebarOpen && (
-            <div className="absolute bottom-4 left-4 right-4 p-3 bg-[#0F1115] border border-white/10 rounded-lg">
-              <div className="text-xs space-y-1">
-                <div className="text-[#C4C4CC]">System Load</div>
-                <div className="flex items-center gap-2">
-                  <div className="flex-1 h-1.5 bg-[#30475E] rounded-full overflow-hidden">
-                    <div className="h-full w-[78%] bg-[#3DBE84] rounded-full" />
-                  </div>
-                  <span className="text-[#3DBE84]">78%</span>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
+        <Sidebar
+          navigationItems={navigationItems}
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+          currentView={currentView}
+          setCurrentView={setCurrentView}
+        />
   {/* Main Content */}
   <div className="flex-1 p-4 md:p-6 overflow-y-auto min-h-[calc(100vh-4rem)]">
           {currentView === "dashboard" && (
@@ -243,6 +206,12 @@ export default function App() {
               </div>
               <KPICards />
               <ThroughputChart />
+            </div>
+          )}
+
+          {currentView === "networkmap" && (
+            <div className="space-y-6">
+              <NetworkMapPage />
             </div>
           )}
 
