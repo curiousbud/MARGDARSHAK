@@ -220,6 +220,13 @@ export default function App() {
         <div className="flex-1 p-6 overflow-y-auto h-[calc(100vh-4rem)]">
           {currentView === "dashboard" && (
             <div className="space-y-6">
+               {/* Network Map */}
+              <div className="bg-[#1A1D23] border border-white/10 rounded-lg p-4">
+                <h3 className="text-lg text-white mb-4">Network Map Visualization</h3>
+                <div className="h-[500px]">
+                  <NetworkMap />
+                </div>
+              </div>
               <div>
                 <h2 className="text-2xl text-white">Real-Time Section Overview</h2>
                 <p className="text-sm text-[#C4C4CC]">Live network monitoring and AI-driven insights</p>
@@ -229,17 +236,10 @@ export default function App() {
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2">
-                  <div className="bg-[#1A1D23] border border-white/10 rounded-lg p-4">
-                    <h3 className="text-lg text-white mb-4">Network Map Visualization</h3>
-                    <div className="h-[500px]">
-                      <NetworkMap />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-6">
+                 <div className="space-y-6">
                   <AIRecommendations />
                 </div>
+                </div> 
               </div>
 
               <ThroughputChart />
