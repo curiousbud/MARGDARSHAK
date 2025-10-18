@@ -171,9 +171,10 @@ export default function App() {
       <div className="pt-16 flex">
         {/* Sidebar */}
         <div
-          className={`fixed lg:sticky top-16 left-0 h-[calc(100vh-4rem)] bg-[#1A1D23] border-r border-white/10 transition-all duration-300 z-40 ${
-            sidebarOpen ? "w-64" : "w-0 lg:w-16"
-          } overflow-hidden`}
+          className={`fixed lg:sticky top-16 left-0 h-[calc(100vh-4rem)] bg-[#1A1D23] border-r border-white/10 transition-transform duration-300 z-40 ${
+            sidebarOpen ? "translate-x-0 w-64" : "-translate-x-full lg:translate-x-0 lg:w-16"
+          } overflow-auto`}
+          aria-hidden={!sidebarOpen}
         >
           <nav className="p-4 space-y-2">
             {navigationItems.map((item) => {
@@ -216,16 +217,19 @@ export default function App() {
           )}
         </div>
 
-        {/* Main Content */}
-        <div className="flex-1 p-6 overflow-y-auto h-[calc(100vh-4rem)]">
+  {/* Main Content */}
+  <div className="flex-1 p-4 md:p-6 overflow-y-auto min-h-[calc(100vh-4rem)]">
           {currentView === "dashboard" && (
             <div className="space-y-6">
-               {/* Network Map */}
+              {/* Network Map */}
               <div className="bg-[#1A1D23] border border-white/10 rounded-lg p-4">
                 <h3 className="text-lg text-white mb-4">Network Map Visualization</h3>
-                <div className="h-[500px]">
+                <div className="h-64 md:h-[500px]">
                   <NetworkMap />
                 </div>
+              </div>
+              <div className="space-y-6">
+                <AIRecommendations />
               </div>
               <div>
                 <h2 className="text-2xl text-white">Real-Time Section Overview</h2>
@@ -234,13 +238,8 @@ export default function App() {
 
               <KPICards />
 
-              <div className="grid grid-cols-2 lg:grid-span-2 gap-6">
-                <div className="lg:col-span-2">
-                 <div className="space-y-6">
-                  <AIRecommendations />
-                </div>
-                </div> 
-              </div>
+              {/* Recommendations - full width responsive */}
+              
 
               <ThroughputChart />
             </div>

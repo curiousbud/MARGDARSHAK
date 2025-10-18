@@ -23,6 +23,7 @@ export function NetworkMap() {
   const [hoveredTrain, setHoveredTrain] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log('NetworkMap mounted, initial trains:', trains.length);
     const interval = setInterval(() => {
       setTrains((prev) =>
         prev.map((train) => ({
@@ -52,7 +53,10 @@ export function NetworkMap() {
   };
 
   return (
-    <div className="relative w-full h-full bg-[#0F1115] rounded-lg overflow-hidden border border-white/10">
+    <div
+      className="relative w-full h-full bg-[#0F1115] rounded-lg overflow-hidden border border-white/10"
+      style={{ minHeight: 200 }}
+    >
       {/* Grid Background */}
       <svg className="absolute inset-0 w-full h-full opacity-20">
         <defs>
