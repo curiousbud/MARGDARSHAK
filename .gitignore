@@ -1,0 +1,15 @@
+# Node
+node_modules/
+
+# Vite cache
+.vite/
+
+# local env
+.env.local
+.env.*.local
+
+# VSCode
+.vscode/
+
+# Ignore generated build folder inside Frontend
+Frontend/build/

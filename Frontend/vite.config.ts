@@ -6,8 +6,8 @@
 
   export default defineConfig({
     plugins: [react(),
-      // bundle visualizer (generates build/stats.html)
-      visualizer({ filename: 'build/stats.html', open: false, gzipSize: true })
+  // bundle visualizer (generates dist/stats.html)
+  visualizer({ filename: 'dist/stats.html', open: false, gzipSize: true })
     ],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -55,7 +55,7 @@
     },
     build: {
       target: 'esnext',
-      outDir: 'build',
+      outDir: 'dist',
     },
     server: {
       port: 3000,
