@@ -6,4 +6,5 @@ publish = "dist"
 from = "/*"
 to = "/index.html"
 status = 200
-force = true
+# Do not force this redirect for every request — allow Netlify to serve existing files
+# (e.g. /assets/*) and only rewrite when a file is not found.

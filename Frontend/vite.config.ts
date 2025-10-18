@@ -5,6 +5,11 @@
   import { visualizer } from 'rollup-plugin-visualizer';
 
   export default defineConfig({
+    // Use relative asset paths so the app works when served from a subpath or
+    // when the host rewrites requests. This prevents built files from referring
+    // to absolute paths like `/assets/...` which can be intercepted by SPA
+    // redirects on hosts like Netlify.
+    base: './',
     plugins: [react(),
   // bundle visualizer (generates dist/stats.html)
   visualizer({ filename: 'dist/stats.html', open: false, gzipSize: true })
