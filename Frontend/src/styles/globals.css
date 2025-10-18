@@ -54,6 +54,8 @@
   --railway-clear: #3DBE84;
   --railway-delayed: #FDB813;
   --railway-congested: #E63946;
+  /* Default icon/logo color used across the app so icons are visible without hover */
+  --railway-logo-color: var(--railway-off-white);
 }
 
 .dark {
@@ -201,4 +203,21 @@
 
 html {
   font-size: var(--font-size);
+}
+
+/* Make SVG icons inherit the theme color by default and ensure visible contrast */
+svg, .icon, .lucide {
+  color: var(--railway-logo-color);
+  fill: currentColor;
+}
+
+/* Header logo specific: give it a visible background and padding so it doesn't blend in */
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, var(--railway-steel-blue), var(--railway-emerald));
+  color: white;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
 }

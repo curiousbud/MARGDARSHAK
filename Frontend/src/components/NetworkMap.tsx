@@ -11,7 +11,7 @@ interface Train {
   speed: number;
 }
 
-export function NetworkMap({ size, height }: { size?: string; height?: string }) {
+export function NetworkMap({ size, height, showLegend = true }: { size?: string; height?: string; showLegend?: boolean }) {
   const [trains, setTrains] = useState<Train[]>([
     { id: "12001", name: "Shatabdi Exp", position: { x: 15, y: 30 }, status: "clear", type: "Express", eta: "14:23", speed: 110 },
     { id: "12951", name: "Rajdhani Exp", position: { x: 45, y: 55 }, status: "delayed", type: "Superfast", eta: "14:45", speed: 95 },
@@ -168,22 +168,24 @@ export function NetworkMap({ size, height }: { size?: string; height?: string })
       ))}
 
       {/* Legend */}
-      <div className="absolute bottom-4 left-4 bg-[#1A1D23]/90 border border-white/10 rounded-lg p-3 backdrop-blur-sm">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#3DBE84]" />
-            <span className="text-xs text-[#FAFAFA]">Clear</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#FDB813]" />
-            <span className="text-xs text-[#FAFAFA]">Delayed</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#E63946]" />
-            <span className="text-xs text-[#FAFAFA]">Congested</span>
+      {showLegend && (
+        <div className="absolute bottom-4 left-4 bg-[#1A1D23]/90 border border-white/10 rounded-lg p-3 backdrop-blur-sm">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-[#3DBE84]" />
+              <span className="text-xs text-[#FAFAFA]">Clear</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-[#FDB813]" />
+              <span className="text-xs text-[#FAFAFA]">Delayed</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-[#E63946]" />
+              <span className="text-xs text-[#FAFAFA]">Congested</span>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
