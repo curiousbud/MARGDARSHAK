@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { LoginPage } from "./components/LoginPage";
+import { LoginPage } from "./pages/LoginPage";
 import { NetworkMap } from "./components/NetworkMap";
 import { KPICards } from "./components/KPICards";
 import { AIRecommendations } from "./components/AIRecommendations";
 import { ConflictDetection } from "./components/ConflictDetection";
 import { ThroughputChart } from "./components/ThroughputChart";
 import { SimulationPanel } from "./components/SimulationPanel";
-import { PerformanceDashboard } from "./components/PerformanceDashboard";
+import { PerformanceDashboard } from "./pages/PerformanceDashboard";
 import { SettingsPanel } from "./components/SettingsPanel";
 import {
   LayoutDashboard,
