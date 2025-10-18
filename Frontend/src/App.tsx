@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { LoginPage } from "./pages/LoginPage";
 import { NetworkMap } from "./components/NetworkMap";
 import { KPICards } from "./components/KPICards";
 import { AIRecommendations } from "./components/AIRecommendations";
 import { ConflictDetection } from "./components/ConflictDetection";
+const ConflictDetectionPage = lazy(() => import("./pages/ConflictDetectionPage"));
+const DashboardPage = lazy(() => import("./pages/DashboardPage"));
+const SimulationPage = lazy(() => import("./pages/SimulationPage"));
+const SettingsPage = lazy(() => import("./pages/SettingsPage"));
 import { ThroughputChart } from "./components/ThroughputChart";
 import { SimulationPanel } from "./components/SimulationPanel";
-import { PerformanceDashboard } from "./pages/PerformanceDashboard";
+const PerformanceDashboard = lazy(() => import("./pages/PerformanceDashboard").then((m) => ({ default: m.PerformanceDashboard })));
 import { SettingsPanel } from "./components/SettingsPanel";
 import {
   LayoutDashboard,
@@ -186,26 +190,12 @@ export default function App() {
           currentView={currentView}
           setCurrentView={setCurrentView}
         />
-  {/* Main Content */}
-  <div className="flex-1 p-4 md:p-6 overflow-y-auto min-h-[calc(100vh-4rem)]">
+    {/* Main Content */}
+    <Suspense fallback={<div className="flex-1 p-6">Loading...</div>}>
+      <div className="flex-1 p-4 md:p-6 overflow-y-auto h-[calc(100vh-4rem)]">
           {currentView === "dashboard" && (
             <div className="space-y-6">
-              {/* Network Map */}
-              <div className="bg-[#1A1D23] border border-white/10 rounded-lg p-4 overflow-visible">
-                <h3 className="text-lg text-white mb-4">Network Map Visualization</h3>
-                <div className="h-80 md:h-[600px] lg:h-[800px] min-h-[320px]">
-                  <NetworkMap height="60vh" />
-                </div>
-              </div>
-              <div className="space-y-6">
-                <AIRecommendations />
-              </div>
-              <div>
-                <h2 className="text-2xl text-white">Real-Time Section Overview</h2>
-                <p className="text-sm text-[#C4C4CC]">Live network monitoring and AI-driven insights</p>
-              </div>
-              <KPICards />
-              <ThroughputChart />
+              <DashboardPage />
             </div>
           )}
 
@@ -217,37 +207,13 @@ export default function App() {
 
           {currentView === "conflicts" && (
             <div className="space-y-6">
-              <div>
-                <h2 className="text-2xl text-white">Conflict Detection & Resolution</h2>
-                <p className="text-sm text-[#C4C4CC]">
-                  Identify and resolve train path conflicts with AI assistance
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <ConflictDetection />
-                <div className="space-y-6">
-                  <AIRecommendations />
-                  <div className="bg-[#1A1D23] border border-white/10 rounded-lg p-4">
-                    <h3 className="text-lg text-white mb-4">Network Status</h3>
-                    <div className="h-[300px]">
-                      <NetworkMap height="300px" />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ConflictDetectionPage />
             </div>
           )}
 
           {currentView === "simulation" && (
             <div className="space-y-6">
-              <div>
-                <h2 className="text-2xl text-white">What-If Simulation</h2>
-                <p className="text-sm text-[#C4C4CC]">
-                  Test scenarios and optimize decisions before implementation
-                </p>
-              </div>
-              <SimulationPanel />
+              <SimulationPage />
             </div>
           )}
 
@@ -259,11 +225,12 @@ export default function App() {
 
           {currentView === "settings" && (
             <div className="space-y-6">
-              <SettingsPanel />
+              <SettingsPage />
             </div>
           )}
-        </div>
       </div>
+    </Suspense>
+    </div>
     </div>
   );
 }
