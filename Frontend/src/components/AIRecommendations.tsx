@@ -100,11 +100,14 @@ export function AIRecommendations() {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="space-y-3">
+        <div
+          className="grid gap-3"
+          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))" }}
+        >
           {recommendations.map((rec) => (
             <div
               key={rec.id}
-              className="bg-[#0F1115] border border-white/10 rounded-lg p-4 space-y-3 hover:border-[#3DBE84]/30 transition-all"
+              className="bg-[#0F1115] border border-white/10 rounded-lg p-4 space-y-3 hover:border-[#3DBE84]/30 transition-all w-full"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 space-y-2">
@@ -151,8 +154,9 @@ export function AIRecommendations() {
               </div>
             </div>
           ))}
+
           {recommendations.length === 0 && (
-            <div className="text-center py-8 text-[#9CA3AF]">
+            <div className="text-center py-8 text-[#9CA3AF] w-full">
               <Lightbulb className="w-12 h-12 mx-auto mb-3 opacity-30" />
               <p className="text-sm">No active recommendations</p>
               <p className="text-xs mt-1">AI is monitoring the network for optimization opportunities</p>
