@@ -42,7 +42,7 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentView, setCurrentView] = useState<View>("dashboard");
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -73,17 +73,18 @@ export default function App() {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden"
+              aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+              className="lg:hidden bg-[#0F1115] border border-white/10 rounded-lg p-2"
               onClick={() => setSidebarOpen(!sidebarOpen)}
             >
-              {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {sidebarOpen ? <X className="w-5 h-5 text-[#C4C4CC]" /> : <Menu className="w-5 h-5 text-[#C4C4CC]" />}
             </Button>
             
             <div className="flex items-center gap-3">
               <div className="p-2 bg-gradient-to-br from-[#30475E] to-[#3DBE84] rounded-lg">
                 <Train className="w-6 h-6 text-white" />
               </div>
-              <div className="hidden sm:block">
+              <div className="block">
                 <h1 className="text-lg text-white">MARGDARSHAK</h1>
                 <p className="text-xs text-[#3DBE84]">Section Controller Dashboard</p>
               </div>
@@ -117,9 +118,14 @@ export default function App() {
               </div>
             </div>
 
-            <Button variant="ghost" size="icon" className="relative">
-              <Bell className="w-5 h-5" />
-              <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center bg-[#E63946] text-white text-xs border-none">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Notifications"
+              className="relative bg-[#0F1115] border border-white/10 rounded-lg h-10 w-10 flex items-center justify-center"
+            >
+              <Bell className="w-5 h-5 text-[#C4C4CC]" />
+              <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center bg-[#E63946] text-white text-xs border-none rounded-full">
                 3
               </Badge>
             </Button>
@@ -171,9 +177,10 @@ export default function App() {
       <div className="pt-16 flex">
         {/* Sidebar */}
         <div
-          className={`fixed lg:sticky top-16 left-0 h-[calc(100vh-4rem)] bg-[#1A1D23] border-r border-white/10 transition-all duration-300 z-40 ${
-            sidebarOpen ? "w-64" : "w-0 lg:w-16"
-          } overflow-hidden`}
+          className={`fixed lg:sticky top-16 left-0 h-[calc(100vh-4rem)] bg-[#1A1D23] border-r border-white/10 transition-transform duration-300 z-40 ${
+            sidebarOpen ? "translate-x-0 w-64" : "-translate-x-full lg:translate-x-0 lg:w-16"
+          } overflow-auto`}
+          aria-hidden={!sidebarOpen}
         >
           <nav className="p-4 space-y-2">
             {navigationItems.map((item) => {
@@ -216,32 +223,25 @@ export default function App() {
           )}
         </div>
 
-        {/* Main Content */}
-        <div className="flex-1 p-6 overflow-y-auto h-[calc(100vh-4rem)]">
+  {/* Main Content */}
+  <div className="flex-1 p-4 md:p-6 overflow-y-auto min-h-[calc(100vh-4rem)]">
           {currentView === "dashboard" && (
             <div className="space-y-6">
+              {/* Network Map */}
+              <div className="bg-[#1A1D23] border border-white/10 rounded-lg p-4 overflow-visible">
+                <h3 className="text-lg text-white mb-4">Network Map Visualization</h3>
+                <div className="h-80 md:h-[600px] lg:h-[800px] min-h-[320px]">
+                  <NetworkMap height="60vh" />
+                </div>
+              </div>
+              <div className="space-y-6">
+                <AIRecommendations />
+              </div>
               <div>
                 <h2 className="text-2xl text-white">Real-Time Section Overview</h2>
                 <p className="text-sm text-[#C4C4CC]">Live network monitoring and AI-driven insights</p>
               </div>
-
               <KPICards />
-
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2">
-                  <div className="bg-[#1A1D23] border border-white/10 rounded-lg p-4">
-                    <h3 className="text-lg text-white mb-4">Network Map Visualization</h3>
-                    <div className="h-[500px]">
-                      <NetworkMap />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-6">
-                  <AIRecommendations />
-                </div>
-              </div>
-
               <ThroughputChart />
             </div>
           )}
@@ -262,7 +262,7 @@ export default function App() {
                   <div className="bg-[#1A1D23] border border-white/10 rounded-lg p-4">
                     <h3 className="text-lg text-white mb-4">Network Status</h3>
                     <div className="h-[300px]">
-                      <NetworkMap />
+                      <NetworkMap height="300px" />
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
 
 interface Train {
@@ -11,7 +11,7 @@ interface Train {
   speed: number;
 }
 
-export function NetworkMap() {
+export function NetworkMap({ size, height }: { size?: string; height?: string }) {
   const [trains, setTrains] = useState<Train[]>([
     { id: "12001", name: "Shatabdi Exp", position: { x: 15, y: 30 }, status: "clear", type: "Express", eta: "14:23", speed: 110 },
     { id: "12951", name: "Rajdhani Exp", position: { x: 45, y: 55 }, status: "delayed", type: "Superfast", eta: "14:45", speed: 95 },
@@ -51,8 +51,17 @@ export function NetworkMap() {
     }
   };
 
+  const inlineStyle: React.CSSProperties | undefined = height
+    ? { height }
+    : undefined;
+
   return (
-    <div className="relative w-full h-full bg-[#0F1115] rounded-lg overflow-hidden border border-white/10">
+    <div
+      className={`relative w-full h-full bg-[#0F1115] rounded-lg overflow-hidden border border-white/10 ${
+        size ? size : "min-h-[400px]"
+      }`}
+      style={inlineStyle}
+    >
       {/* Grid Background */}
       <svg className="absolute inset-0 w-full h-full opacity-20">
         <defs>

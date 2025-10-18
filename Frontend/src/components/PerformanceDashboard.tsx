@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Download, TrendingUp } from "lucide-react";
+import React from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell } from "recharts";
 
 const delayByCategory = [
@@ -88,7 +89,7 @@ export function PerformanceDashboard() {
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ name, value }) => `${name}: ${value}%`}
+                  label={({ name, value }: { name: string; value: number }) => `${name}: ${value}%`}
                   outerRadius={100}
                   fill="#8884d8"
                   dataKey="value"
