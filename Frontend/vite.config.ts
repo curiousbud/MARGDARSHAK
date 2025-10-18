@@ -2,9 +2,13 @@
   import { defineConfig } from 'vite';
   import react from '@vitejs/plugin-react-swc';
   import path from 'path';
+  import { visualizer } from 'rollup-plugin-visualizer';
 
   export default defineConfig({
-    plugins: [react()],
+    plugins: [react(),
+      // bundle visualizer (generates build/stats.html)
+      visualizer({ filename: 'build/stats.html', open: false, gzipSize: true })
+    ],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       alias: {
