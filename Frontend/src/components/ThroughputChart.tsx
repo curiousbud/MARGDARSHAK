@@ -25,11 +25,11 @@ const utilizationData = [
 export function ThroughputChart() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      <Card className="bg-[#1A1D23] border-white/10">
+  <Card className="bg-railway-card-bg border-white/10">
         <CardHeader>
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-[#3DBE84]/20 rounded-lg">
-              <Activity className="w-5 h-5 text-[#3DBE84]" />
+            <div className="p-2 bg-railway-emerald-20 rounded-lg">
+              <Activity className="w-5 h-5 text-[var(--railway-emerald)]" />
             </div>
             <CardTitle className="text-white">Throughput & Capacity</CardTitle>
           </div>
@@ -37,45 +37,45 @@ export function ThroughputChart() {
         <CardContent>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart data={throughputData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#30475E" opacity={0.3} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--railway-steel-blue)" opacity={0.3} />
               <XAxis
                 dataKey="time"
-                stroke="#FAFAFA"
-                tick={{ fill: "#FAFAFA", fontSize: 12 }}
-                tickLine={{ stroke: "#30475E" }}
+                stroke="var(--railway-off-white)"
+                tick={{ fill: "var(--railway-off-white)", fontSize: 12 }}
+                tickLine={{ stroke: "var(--railway-steel-blue)" }}
               />
               <YAxis
-                stroke="#FAFAFA"
-                tick={{ fill: "#FAFAFA", fontSize: 12 }}
-                tickLine={{ stroke: "#30475E" }}
+                stroke="var(--railway-off-white)"
+                tick={{ fill: "var(--railway-off-white)", fontSize: 12 }}
+                tickLine={{ stroke: "var(--railway-steel-blue)" }}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "#1A1D23",
+                  backgroundColor: "var(--railway-card-bg)",
                   border: "1px solid rgba(255,255,255,0.1)",
                   borderRadius: "8px",
-                  color: "#FAFAFA",
+                  color: "var(--railway-off-white)",
                 }}
               />
               <Legend
-                wrapperStyle={{ color: "#FAFAFA", fontSize: "12px" }}
+                wrapperStyle={{ color: "var(--railway-off-white)", fontSize: "12px" }}
                 iconType="line"
               />
               <Line
                 type="monotone"
                 dataKey="trains"
-                stroke="#3DBE84"
+                stroke="var(--railway-emerald)"
                 strokeWidth={2}
-                dot={{ fill: "#3DBE84", r: 4 }}
+                dot={{ fill: "var(--railway-emerald)", r: 4 }}
                 name="Trains/Hour"
               />
               <Line
                 type="monotone"
                 dataKey="capacity"
-                stroke="#30475E"
+                stroke="var(--railway-steel-blue)"
                 strokeWidth={2}
                 strokeDasharray="5 5"
-                dot={{ fill: "#30475E", r: 4 }}
+                dot={{ fill: "var(--railway-steel-blue)", r: 4 }}
                 name="Max Capacity"
               />
             </LineChart>
@@ -83,11 +83,11 @@ export function ThroughputChart() {
         </CardContent>
       </Card>
 
-      <Card className="bg-[#1A1D23] border-white/10">
+  <Card className="bg-railway-card-bg border-white/10">
         <CardHeader>
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-[#FDB813]/20 rounded-lg">
-              <Activity className="w-5 h-5 text-[#FDB813]" />
+            <div className="p-2 bg-railway-amber-20 rounded-lg">
+              <Activity className="w-5 h-5 text-[var(--railway-amber)]" />
             </div>
             <CardTitle className="text-white">Section Utilization</CardTitle>
           </div>
@@ -97,35 +97,35 @@ export function ThroughputChart() {
             <AreaChart data={utilizationData}>
               <defs>
                 <linearGradient id="utilizationGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#FDB813" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#FDB813" stopOpacity={0} />
+                  <stop offset="5%" stopColor="var(--railway-amber)" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="var(--railway-amber)" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#30475E" opacity={0.3} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--railway-steel-blue)" opacity={0.3} />
               <XAxis
                 dataKey="time"
-                stroke="#FAFAFA"
-                tick={{ fill: "#FAFAFA", fontSize: 12 }}
-                tickLine={{ stroke: "#30475E" }}
+                stroke="var(--railway-off-white)"
+                tick={{ fill: "var(--railway-off-white)", fontSize: 12 }}
+                tickLine={{ stroke: "var(--railway-steel-blue)" }}
               />
               <YAxis
-                stroke="#FAFAFA"
-                tick={{ fill: "#FAFAFA", fontSize: 12 }}
-                tickLine={{ stroke: "#30475E" }}
+                stroke="var(--railway-off-white)"
+                tick={{ fill: "var(--railway-off-white)", fontSize: 12 }}
+                tickLine={{ stroke: "var(--railway-steel-blue)" }}
                 domain={[0, 100]}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "#1A1D23",
+                  backgroundColor: "var(--railway-card-bg)",
                   border: "1px solid rgba(255,255,255,0.1)",
                   borderRadius: "8px",
-                  color: "#FAFAFA",
+                  color: "var(--railway-off-white)",
                 }}
               />
               <Area
                 type="monotone"
                 dataKey="utilization"
-                stroke="#FDB813"
+                stroke="var(--railway-amber)"
                 strokeWidth={2}
                 fill="url(#utilizationGradient)"
                 name="Utilization %"

@@ -1,5 +1,6 @@
 import React from "react";
 import { Badge } from "./ui/badge";
+import { Train } from "lucide-react";
 
 type NavItem = {
   id: any;
@@ -24,11 +25,15 @@ export default function Sidebar({
 }: SidebarProps) {
   return (
     <div
-      className={`fixed lg:sticky top-16 left-0 h-[calc(100vh-4rem)] bg-[#1A1D23] border-r border-white/10 transition-transform duration-300 z-40 ${
+      className={`fixed lg:sticky top-16 left-0 h-[calc(100vh-4rem)] bg-railway-card-bg border-r border-white/10 transition-transform duration-300 z-40 ${
         sidebarOpen ? "translate-x-0 w-64" : "-translate-x-full lg:translate-x-0 lg:w-16"
       } overflow-auto`}
       aria-hidden={!sidebarOpen}
+      role="navigation"
+      aria-label="Main navigation"
     >
+      
+
       <nav className="p-4 space-y-2">
         {navigationItems.map((item) => {
           const Icon = item.icon;
@@ -36,17 +41,23 @@ export default function Sidebar({
           return (
             <button
               key={item.id}
-              onClick={() => setCurrentView(item.id)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+              onClick={() => {
+                setCurrentView(item.id);
+                // close sidebar on mobile after navigation
+                setTimeout(() => setSidebarOpen(false), 120);
+              }}
+              className={`relative w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all nav-item ${
                 isActive
-                  ? "bg-[#3DBE84]/20 text-[#3DBE84] border border-[#3DBE84]/30"
-                  : "text-[#C4C4CC] hover:bg-[#0F1115] hover:text-white"
+                  ? 'sidebar-active text-railway-emerald bg-railway-emerald-10'
+                  : 'text-railway-off-white hover:bg-railway-dark-bg hover:text-white'
               }`}
+              aria-current={isActive ? 'page' : undefined}
             >
-              <Icon className="w-5 h-5 flex-shrink-0" />
+              <Icon className="nav-icon" />
               {sidebarOpen && <span className="text-sm whitespace-nowrap">{item.label}</span>}
+
               {!sidebarOpen && item.id === "conflicts" && (
-                <Badge className="absolute left-8 top-2 w-4 h-4 p-0 flex items-center justify-center bg-[#E63946] text-white text-xs border-none">
+                <Badge className="absolute left-10 top-2 w-4 h-4 p-0 flex items-center justify-center bg-[var(--railway-danger)] text-white text-xs border-none rounded-full">
                   3
                 </Badge>
               )}
@@ -56,14 +67,14 @@ export default function Sidebar({
       </nav>
 
       {sidebarOpen && (
-        <div className="absolute bottom-4 left-4 right-4 p-3 bg-[#0F1115] border border-white/10 rounded-lg">
+        <div className="absolute bottom-4 left-4 right-4 p-3 bg-railway-dark-bg border border-white/10 rounded-lg">
           <div className="text-xs space-y-1">
-            <div className="text-[#C4C4CC]">System Load</div>
+            <div className="text-railway-off-white">System Load</div>
             <div className="flex items-center gap-2">
-              <div className="flex-1 h-1.5 bg-[#30475E] rounded-full overflow-hidden">
-                <div className="h-full w-[78%] bg-[#3DBE84] rounded-full" />
+              <div className="flex-1 h-1.5 bg-[var(--railway-steel-blue)] rounded-full overflow-hidden">
+                <div className="h-full w-[78%] bg-[var(--railway-emerald)] rounded-full" />
               </div>
-              <span className="text-[#3DBE84]">78%</span>
+              <span className="text-[var(--railway-emerald)]">78%</span>
             </div>
           </div>
         </div>

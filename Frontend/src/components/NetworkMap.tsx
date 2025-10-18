@@ -41,13 +41,13 @@ export function NetworkMap({ size, height, showLegend = true }: { size?: string;
   const getStatusColor = (status: string) => {
     switch (status) {
       case "clear":
-        return "#3DBE84";
+        return "var(--railway-clear)";
       case "delayed":
-        return "#FDB813";
+        return "var(--railway-delayed)";
       case "congested":
-        return "#E63946";
+        return "var(--railway-congested)";
       default:
-        return "#3DBE84";
+        return "var(--railway-clear)";
     }
   };
 
@@ -66,7 +66,7 @@ export function NetworkMap({ size, height, showLegend = true }: { size?: string;
       <svg className="absolute inset-0 w-full h-full opacity-20">
         <defs>
           <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#30475E" strokeWidth="0.5" />
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="var(--railway-steel-blue)" strokeWidth="0.5" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#grid)" />
@@ -74,11 +74,11 @@ export function NetworkMap({ size, height, showLegend = true }: { size?: string;
 
       {/* Railway Track Lines */}
       <svg className="absolute inset-0 w-full h-full">
-        <line x1="10%" y1="30%" x2="90%" y2="30%" stroke="#30475E" strokeWidth="3" strokeDasharray="10,5" />
-        <line x1="10%" y1="50%" x2="90%" y2="50%" stroke="#30475E" strokeWidth="3" strokeDasharray="10,5" />
-        <line x1="10%" y1="70%" x2="90%" y2="70%" stroke="#30475E" strokeWidth="3" strokeDasharray="10,5" />
-        <line x1="30%" y1="10%" x2="30%" y2="90%" stroke="#30475E" strokeWidth="2" strokeDasharray="5,3" />
-        <line x1="70%" y1="10%" x2="70%" y2="90%" stroke="#30475E" strokeWidth="2" strokeDasharray="5,3" />
+        <line x1="10%" y1="30%" x2="90%" y2="30%" stroke="var(--railway-steel-blue)" strokeWidth="3" strokeDasharray="10,5" />
+        <line x1="10%" y1="50%" x2="90%" y2="50%" stroke="var(--railway-steel-blue)" strokeWidth="3" strokeDasharray="10,5" />
+        <line x1="10%" y1="70%" x2="90%" y2="70%" stroke="var(--railway-steel-blue)" strokeWidth="3" strokeDasharray="10,5" />
+        <line x1="30%" y1="10%" x2="30%" y2="90%" stroke="var(--railway-steel-blue)" strokeWidth="2" strokeDasharray="5,3" />
+        <line x1="70%" y1="10%" x2="70%" y2="90%" stroke="var(--railway-steel-blue)" strokeWidth="2" strokeDasharray="5,3" />
       </svg>
 
       {/* Junction Points */}
@@ -92,7 +92,7 @@ export function NetworkMap({ size, height, showLegend = true }: { size?: string;
       ].map((junction) => (
         <div
           key={junction.name}
-          className="absolute w-3 h-3 bg-[#30475E] border-2 border-[#3DBE84] rounded-full transform -translate-x-1/2 -translate-y-1/2"
+          className="absolute w-3 h-3 bg-[var(--railway-steel-blue)] border-2 border-[var(--railway-emerald)] rounded-full transform -translate-x-1/2 -translate-y-1/2"
           style={{ left: `${junction.x}%`, top: `${junction.y}%` }}
         />
       ))}
@@ -129,31 +129,31 @@ export function NetworkMap({ size, height, showLegend = true }: { size?: string;
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="absolute left-6 top-0 bg-[#1A1D23] border border-[#3DBE84]/30 rounded-lg p-3 min-w-[180px] z-50 shadow-xl"
+              className="absolute left-6 top-0 bg-[var(--railway-card-bg)] border border-[var(--railway-emerald)]/30 rounded-lg p-3 min-w-[180px] z-50 shadow-xl"
             >
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs text-[#3DBE84]">Train ID:</span>
+                    <span className="text-xs text-[var(--railway-emerald)]">Train ID:</span>
                   <span className="text-xs text-white">{train.id}</span>
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs text-[#3DBE84]">Name:</span>
+                    <span className="text-xs text-[var(--railway-emerald)]">Name:</span>
                   <span className="text-xs text-white">{train.name}</span>
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs text-[#3DBE84]">Type:</span>
+                    <span className="text-xs text-[var(--railway-emerald)]">Type:</span>
                   <span className="text-xs text-white">{train.type}</span>
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs text-[#3DBE84]">Speed:</span>
+                    <span className="text-xs text-[var(--railway-emerald)]">Speed:</span>
                   <span className="text-xs text-white">{train.speed} km/h</span>
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs text-[#3DBE84]">ETA:</span>
+                    <span className="text-xs text-[var(--railway-emerald)]">ETA:</span>
                   <span className="text-xs text-white">{train.eta}</span>
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs text-[#3DBE84]">Status:</span>
+                    <span className="text-xs text-[var(--railway-emerald)]">Status:</span>
                   <span
                     className="text-xs px-2 py-0.5 rounded"
                     style={{ backgroundColor: getStatusColor(train.status) + "30", color: getStatusColor(train.status) }}
@@ -169,19 +169,19 @@ export function NetworkMap({ size, height, showLegend = true }: { size?: string;
 
       {/* Legend */}
       {showLegend && (
-        <div className="absolute bottom-4 left-4 bg-[#1A1D23]/90 border border-white/10 rounded-lg p-3 backdrop-blur-sm">
+        <div className="absolute bottom-4 left-4 bg-[var(--railway-card-bg)]/90 border border-white/10 rounded-lg p-3 backdrop-blur-sm">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#3DBE84]" />
-              <span className="text-xs text-[#FAFAFA]">Clear</span>
+              <div className="w-3 h-3 rounded-full bg-[var(--railway-clear)]" />
+              <span className="text-xs text-[var(--railway-off-white)]">Clear</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#FDB813]" />
-              <span className="text-xs text-[#FAFAFA]">Delayed</span>
+              <div className="w-3 h-3 rounded-full bg-[var(--railway-delayed)]" />
+              <span className="text-xs text-[var(--railway-off-white)]">Delayed</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#E63946]" />
-              <span className="text-xs text-[#FAFAFA]">Congested</span>
+              <div className="w-3 h-3 rounded-full bg-[var(--railway-congested)]" />
+              <span className="text-xs text-[var(--railway-off-white)]">Congested</span>
             </div>
           </div>
         </div>

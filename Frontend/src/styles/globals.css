@@ -221,3 +221,89 @@ svg, .icon, .lucide {
   padding: 0.4rem;
   border-radius: 0.5rem;
 }
+
+/* Utility classes mapped to theme variables to avoid hardcoded hex values in components */
+@layer utilities {
+  .bg-railway-dark-bg { background-color: var(--railway-dark-bg) !important; }
+  .bg-railway-card-bg { background-color: var(--railway-card-bg) !important; }
+  .text-railway-off-white { color: var(--railway-off-white) !important; }
+  .text-railway-muted { color: var(--muted-foreground) !important; }
+  .text-railway-emerald { color: var(--railway-emerald) !important; }
+  .text-railway-amber { color: var(--railway-amber) !important; }
+  .text-railway-danger { color: var(--railway-danger) !important; }
+  .border-railway { border-color: var(--color-border) !important; }
+  .bg-railway-gradient { background-image: linear-gradient(90deg, var(--railway-steel-blue), var(--railway-emerald)) !important; }
+
+  /* translucent helpers */
+  .bg-railway-emerald-20 { background-color: rgba(61,190,132,0.2) !important; }
+  .border-railway-emerald-30 { border-color: rgba(61,190,132,0.3) !important; }
+  .bg-railway-amber-20 { background-color: rgba(253,184,19,0.2) !important; }
+  .bg-railway-danger-20 { background-color: rgba(230,57,70,0.2) !important; }
+
+  /* small helpers */
+  .text-railway-off-white-50 { color: rgba(250,250,250,0.5) !important; }
+}
+
+/* Sidebar-specific visuals */
+.sidebar-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, rgba(48,71,94,0.12), rgba(61,190,132,0.06));
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--railway-off-white);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-active {
+  box-shadow: inset 4px 0 0 0 var(--railway-emerald);
+  background: rgba(61,190,132,0.06);
+  color: var(--railway-emerald) !important;
+}
+
+/* small responsive tweak: when collapsed ensure nav icons are centered */
+@media (max-width: 1024px) {
+  .lg\:w-16 & {
+    .nav-icon { margin: 0; }
+  }
+}
+
+/* Hover and focus affordances for sidebar nav items */
+.nav-item {
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 160ms linear, color 120ms linear;
+}
+
+.nav-item:hover,
+.nav-item:focus-within {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  background: rgba(255,255,255,0.02);
+}
+
+.nav-item:hover .nav-icon,
+.nav-item:focus-within .nav-icon {
+  transform: translateY(-2px);
+  color: var(--railway-emerald);
+}
+
+/* Match hover styles for keyboard users */
+.nav-item:focus-visible {
+  outline: 2px solid rgba(61,190,132,0.18);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-item, .nav-icon { transition: none !important; transform: none !important; }
+}

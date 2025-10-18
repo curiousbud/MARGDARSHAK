@@ -68,9 +68,9 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0F1115] dark">
+    <div className="min-h-screen bg-railway-dark-bg dark">
       {/* Top Bar */}
-      <div className="fixed top-0 left-0 right-0 h-16 bg-[#1A1D23] border-b border-white/10 z-50">
+  <div className="fixed top-0 left-0 right-0 h-16 bg-railway-card-bg border-b border-white/10 z-50">
         <div className="h-full px-4 flex items-center justify-between gap-4">
           {/* Left Section */}
           <div className="flex items-center gap-4">
@@ -78,39 +78,39 @@ export default function App() {
               variant="ghost"
               size="icon"
               aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
-              className="lg:hidden bg-[#0F1115] border border-white/10 rounded-lg p-2"
+              className="lg:hidden bg-railway-dark-bg border border-white/10 rounded-lg p-2"
               onClick={() => setSidebarOpen(!sidebarOpen)}
             >
               {sidebarOpen ? <X className="w-5 h-5 text-[#C4C4CC]" /> : <Menu className="w-5 h-5 text-[#C4C4CC]" />}
             </Button>
             
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-gradient-to-br from-[#30475E] to-[#3DBE84] rounded-lg">
-                <Train className="w-6 h-6 text-white" />
+              <div className="brand-badge p-2">
+                <Train className="w-6 h-6 text-[var(--railway-logo-color)]" />
               </div>
               <div className="block">
                 <h1 className="text-lg text-white">MARGDARSHAK</h1>
-                <p className="text-xs text-[#3DBE84]">Section Controller Dashboard</p>
+                <p className="text-xs text-railway-emerald">Section Controller Dashboard</p>
               </div>
             </div>
           </div>
 
           {/* Center Section - Search */}
-          <div className="flex-1 max-w-md hidden md:block">
+              <div className="flex-1 max-w-md hidden md:block">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[#FAFAFA]/50" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-railway-off-white-50" />
               <Input
                 placeholder="Search train ID or section..."
-                className="pl-10 bg-[#0F1115] border-white/10"
+                className="pl-10 bg-railway-dark-bg border-white/10"
               />
             </div>
           </div>
 
           {/* Right Section */}
           <div className="flex items-center gap-4">
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-[#0F1115] border border-white/10 rounded-lg">
-              <div className="w-2 h-2 bg-[#3DBE84] rounded-full animate-pulse" />
-              <span className="text-xs text-[#C4C4CC]">Live Sync</span>
+            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-railway-dark-bg border border-white/10 rounded-lg">
+              <div className="w-2 h-2 bg-[var(--railway-emerald)] rounded-full animate-pulse" />
+              <span className="text-xs text-railway-off-white">Live Sync</span>
             </div>
 
             <div className="hidden sm:block text-right">
@@ -126,10 +126,10 @@ export default function App() {
               variant="ghost"
               size="icon"
               aria-label="Notifications"
-              className="relative bg-[#0F1115] border border-white/10 rounded-lg h-10 w-10 flex items-center justify-center"
+              className="relative bg-railway-dark-bg border border-white/10 rounded-lg h-10 w-10 flex items-center justify-center"
             >
-              <Bell className="w-5 h-5 text-[#C4C4CC]" />
-              <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center bg-[#E63946] text-white text-xs border-none rounded-full">
+              <Bell className="w-5 h-5 text-railway-off-white-60" />
+              <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center bg-[var(--railway-danger)] text-white text-xs border-none rounded-full">
                 3
               </Badge>
             </Button>
