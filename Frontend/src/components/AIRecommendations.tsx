@@ -87,7 +87,7 @@ export function AIRecommendations() {
   };
 
   return (
-    <Card className="bg-[#1A1D23] border-white/10">
+    <Card className="bg-[#1A1D23] border-0">
       <CardHeader>
         <div className="flex items-center gap-2">
           <div className="p-2 bg-[#3DBE84]/20 rounded-lg">
