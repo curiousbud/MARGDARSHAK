@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import { Check, X, Lightbulb, ArrowRight } from "lucide-react";
+import { Check, X, Lightbulb } from "lucide-react";
 import { useState } from "react";
 
 interface Recommendation {

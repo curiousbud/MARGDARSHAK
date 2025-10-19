@@ -1,17 +1,10 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { LoginPage } from "./pages/LoginPage";
-import { NetworkMap } from "./components/NetworkMap";
-import { KPICards } from "./components/KPICards";
-import { AIRecommendations } from "./components/AIRecommendations";
-import { ConflictDetection } from "./components/ConflictDetection";
 const ConflictDetectionPage = lazy(() => import("./pages/ConflictDetectionPage"));
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 const SimulationPage = lazy(() => import("./pages/SimulationPage"));
 const SettingsPage = lazy(() => import("./pages/SettingsPage"));
-import { ThroughputChart } from "./components/ThroughputChart";
-import { SimulationPanel } from "./components/SimulationPanel";
 const PerformanceDashboard = lazy(() => import("./pages/PerformanceDashboard").then((m) => ({ default: m.PerformanceDashboard })));
-import { SettingsPanel } from "./components/SettingsPanel";
 import {
   LayoutDashboard,
   AlertTriangle,

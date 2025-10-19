@@ -1,4 +1,3 @@
-import React from "react";
 import { ConflictDetection } from "../components/ConflictDetection";
 
 export default function ConflictDetectionPage() {

@@ -1,6 +1,5 @@
 import React from "react";
 import { Badge } from "./ui/badge";
-import { Train } from "lucide-react";
 
 type NavItem = {
   id: any;
