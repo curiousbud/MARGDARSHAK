@@ -51,6 +51,29 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    function onNavigate(e: Event) {
+      const detail = (e as CustomEvent)?.detail as { view?: View } | undefined;
+      if (detail?.view) setCurrentView(detail.view);
+    }
+
+    function onHashChange() {
+      const hash = window.location.hash.replace("#", "");
+      if (hash === "performance") setCurrentView("performance");
+    }
+
+    window.addEventListener("navigate", onNavigate as EventListener);
+    window.addEventListener("hashchange", onHashChange);
+
+    // check initial hash
+    onHashChange();
+
+    return () => {
+      window.removeEventListener("navigate", onNavigate as EventListener);
+      window.removeEventListener("hashchange", onHashChange);
+    };
+  }, []);
+
   if (!isLoggedIn) {
     return <LoginPage onLogin={() => setIsLoggedIn(true)} />;
   }

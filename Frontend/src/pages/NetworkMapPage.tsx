@@ -122,3 +122,4 @@ export default function NetworkMapPage(): JSX.Element {
     </div>
   );
 }
+
