@@ -1,4 +1,3 @@
-import React from "react";
 import { SimulationPanel } from "../components/SimulationPanel";
 
 export default function SimulationPage() {
