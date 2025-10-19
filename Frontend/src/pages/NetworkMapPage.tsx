@@ -94,7 +94,43 @@ export default function NetworkMapPage(): JSX.Element {
         </div>
 
         <div className="mt-4 h-[70vh] min-h-[480px]" ref={containerRef}>
-          <NetworkMap height="100%" showLegend={!fullscreen} />
+          {/* Using station coordinates resolved from your station list (Nominatim). */}
+          <NetworkMap
+            height="100%"
+            showLegend={!fullscreen}
+            blueprintStations={[
+              { id: "VIRAR", name: "Virar", lat: 19.4553059, lng: 72.8118160 },
+              { id: "VAITARNA", name: "Vaitarna", lat: 19.5186517, lng: 72.8499772 },
+              { id: "SAPHALE", name: "Saphale", lat: 19.5771316, lng: 72.8218812 },
+              { id: "KELVE_RD", name: "Kelve Road", lat: 19.6240526, lng: 72.7911751 },
+              { id: "PALGHAR", name: "Palghar", lat: 19.6978882, lng: 72.7718888 },
+              { id: "BOISAR", name: "Boisar", lat: 19.7984865, lng: 72.7614520 },
+              { id: "VANGAON", name: "Vangaon", lat: 19.8829908, lng: 72.7631658 },
+              { id: "DAHANU_RD", name: "Dahanu Road", lat: 19.9915236, lng: 72.7434083 },
+              { id: "GHOLVAD", name: "Gholvad", lat: 20.0868248, lng: 72.7377410 },
+              { id: "UMBERGAON_RD", name: "Umbergaon Road", lat: 20.1537655, lng: 72.7905804 },
+              { id: "SANJAN", name: "Sanjan", lat: 20.1922347, lng: 72.8210847 },
+              { id: "BHILAD", name: "Bhilad", lat: 20.2754926, lng: 72.8873250 },
+              { id: "KARAMBELI", name: "Karambeli", lat: 20.3166250, lng: 72.9012366 },
+              { id: "VAPI", name: "Vapi", lat: 20.3735482, lng: 72.9084376 },
+              { id: "UDVADA", name: "Udvada", lat: 20.4621395, lng: 72.9190049 },
+              { id: "PARDI", name: "Pardi", lat: 20.5137936, lng: 72.9242196 },
+              { id: "ATUL", name: "Atul", lat: 20.5472816, lng: 72.9278239 },
+              { id: "VALSAD", name: "Valsad", lat: 20.6082083, lng: 72.9335048 },
+              { id: "DUNGRI", name: "Dungri", lat: 20.6876797, lng: 72.9492412 },
+              { id: "JORAVASAN", name: "Joravasan", lat: 20.7307493, lng: 72.9661692 },
+              { id: "BILIMORA_JN", name: "Bilimora Junction", lat: 20.7666352, lng: 72.9700083 },
+              { id: "AMALSAD", name: "Amalsad", lat: 20.8114158, lng: 72.9560202 },
+              { id: "ANCHELI", name: "Ancheli", lat: 20.8450701, lng: 72.9454102 },
+              { id: "VEDCHHA", name: "Vedchha", lat: 20.8746931, lng: 72.9360427 },
+              { id: "NAVSARI", name: "Navsari", lat: 20.9481307, lng: 72.9130969 },
+              { id: "MAROLI", name: "Maroli", lat: 21.0200688, lng: 72.8904944 },
+              { id: "SACHIN", name: "Sachin", lat: 21.0778781, lng: 72.8744643 },
+              { id: "BHESTAN", name: "Bhestan", lat: 21.1225832, lng: 72.8630342 },
+              { id: "UDHNA_JN", name: "Udhna Junction", lat: 21.1704267, lng: 72.8509905 },
+              { id: "SURAT", name: "Surat", lat: 21.2050338, lng: 72.8407079 },
+            ]}
+          />
         </div>
       </div>
 
