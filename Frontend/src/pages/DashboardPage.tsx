@@ -1,4 +1,5 @@
 import { NetworkMap } from "../components/NetworkMap";
+import blueprintStations from "../data/blueprintStations";
 import { AIRecommendations } from "../components/AIRecommendations";
 import { KPICards } from "../components/KPICards";
 import { ThroughputChart } from "../components/ThroughputChart";
@@ -11,7 +12,7 @@ export default function DashboardPage() {
         <div className="flex gap-6 items-start">
           {/* Map: take remaining width */}
           <div className="flex-1 h-80 md:h-[600px] lg:h-[800px] min-h-[320px]">
-            <NetworkMap height="60vh" />
+            <NetworkMap height="60vh" showLegend={true} blueprintStations={blueprintStations} />
           </div>
 
           {/* Recommendations: fixed width, scrollable when content overflows */}
