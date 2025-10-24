@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="6.93454" height="16" viewBox="0 0 6.93454 16">
+<defs>
+<radialGradient id="radial-pattern-0" gradientUnits="userSpaceOnUse" cx="118.928574" cy="53.75" fx="118.928574" fy="53.75" r="10" gradientTransform="matrix(1, 0, 0, 1, -90.094246, 14.199026)">
+<stop offset="0" stop-color="rgb(26.274511%, 26.274511%, 26.274511%)" stop-opacity="1"/>
+<stop offset="0.5" stop-color="rgb(14.117648%, 14.117648%, 14.117648%)" stop-opacity="1"/>
+<stop offset="1" stop-color="rgb(19.215687%, 19.215687%, 19.215687%)" stop-opacity="1"/>
+</radialGradient>
+</defs>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" stroke-width="3.933" stroke-linecap="butt" stroke-linejoin="round" stroke="rgb(84.313726%, 84.313726%, 84.313726%)" stroke-opacity="1" stroke-miterlimit="4" d="M 55.380511 103.652672 C 55.380511 118.418654 43.425558 130.373607 28.691887 130.373607 C 13.925904 130.373607 1.970952 118.418654 1.970952 103.652672 L 1.970952 28.691887 C 1.970952 13.925904 13.925904 1.970952 28.691887 1.970952 C 43.425558 1.970952 55.380511 13.925904 55.380511 28.691887 Z M 55.380511 103.652672 " transform="matrix(0.120897, 0, 0, 0.120897, 0, 0)"/>
+<path fill-rule="evenodd" fill="url(#radial-pattern-0)" stroke-width="0.5" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(5.490196%, 5.490196%, 5.490196%)" stroke-opacity="1" stroke-miterlimit="4" d="M 38.837441 67.949367 C 38.837441 73.474494 34.346256 77.933368 28.821129 77.933368 C 23.296003 77.933368 18.837128 73.474494 18.837128 67.949367 C 18.837128 62.42424 23.296003 57.933055 28.821129 57.933055 C 34.346256 57.933055 38.837441 62.42424 38.837441 67.949367 Z M 38.837441 67.949367 " transform="matrix(0.120897, 0, 0, 0.120897, 0, 0)"/>
+<path fill-rule="evenodd" fill="rgb(83.529413%, 7.058824%, 7.058824%)" fill-opacity="1" d="M 4.699219 8.207031 C 4.699219 8.875 4.160156 9.414062 3.492188 9.414062 C 2.824219 9.414062 2.285156 8.875 2.285156 8.207031 C 2.285156 7.539062 2.824219 7 3.492188 7 C 4.160156 7 4.699219 7.539062 4.699219 8.207031 Z M 4.699219 8.207031 "/>
+</svg>

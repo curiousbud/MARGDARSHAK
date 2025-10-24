@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, Polyline, ZoomControl, AttributionControl, Polygon, CircleMarker, useMap, Tooltip } from "react-leaflet";
 import L from "leaflet";
-import stationSvg from "../assets/symbols/general/station.svg";
+import stationSvg from "../assets/preset/symbols/general/station.svg";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
