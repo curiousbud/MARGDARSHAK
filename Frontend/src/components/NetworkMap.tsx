@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, Polyline, ZoomControl, AttributionControl, Polygon, CircleMarker, useMap, Tooltip } from "react-leaflet";
 import L from "leaflet";
+import stationSvg from "../assets/symbols/general/station.svg";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -42,6 +43,17 @@ function createTrainIcon(color = "#3DBE84", heading = 0, label?: string) {
       ${label || ""}
     </div>`;
   return L.divIcon({ html, className: "train-div-icon", iconSize: [size, 18], iconAnchor: [size / 2, 9] });
+}
+
+// Create a simple divIcon for station name labels. We position the label visually
+// to the left of the station coordinate by applying a small pixel offset via CSS
+// transform. The label is non-interactive and will be rendered in the stationPane.
+function createStationLabelIcon(name: string) {
+  const html = `
+    <div class="station-label" style="color: white; font-weight:700; font-size:12px; padding:2px 6px; background: rgba(10,10,10,0.6); border-radius:4px; white-space:nowrap; box-shadow:0 1px 4px rgba(0,0,0,0.5);">
+      ${name}
+    </div>`;
+  return L.divIcon({ html, className: 'station-name-divicon', iconSize: undefined, iconAnchor: [0, 8] });
 }
 
 function MapPanes() {
@@ -86,6 +98,14 @@ export function NetworkMap({ size, height, showLegend = true, horizontal = false
   const route = useMemo(() => stations.map((s) => [s.lat, s.lng] as [number, number]), [stations]);
 
   const wrapperStyle: React.CSSProperties | undefined = { height: mapHeight };
+
+  // station marker icon (from preset symbols)
+  const stationIcon = L.icon({
+    iconUrl: stationSvg,
+    iconSize: [18, 18],
+    iconAnchor: [9, 9],
+    className: 'station-svg-icon'
+  });
 
   // Simulated trains state
   const [trains, setTrains] = useState(() => [
@@ -249,25 +269,38 @@ out skel qt;`;
           )}
 
           {/* Stations: use Overpass nodes if available, else markers from blueprint */}
-          {(osmStations && osmStations.length > 0 ? osmStations : stations.map((s) => ({ id: s.id, name: s.name, lat: s.lat, lng: s.lng }))).map((s) => (
-            <Marker key={`st-${s.id}`} position={[s.lat, s.lng]} pane="stationPane">
-              {/* show popup only in live mode */}
-              {mapMode === 'live' && (
-                <Popup>
-                  <div>
-                    <strong>{s.name}</strong>
-                    <div>ID: {s.id}</div>
-                    <div>Lat: {s.lat.toFixed(6)}</div>
-                    <div>Lng: {s.lng.toFixed(6)}</div>
-                  </div>
-                </Popup>
-              )}
-              {/* permanent small label; slightly smaller in track mode */}
-              <Tooltip permanent direction="right" offset={[10, 0]}>
-                <span style={{ color: 'white', fontWeight: 700, fontSize: mapMode === 'track' ? 11 : 12 }}>{s.name}</span>
-              </Tooltip>
-            </Marker>
-          ))}
+          {(osmStations && osmStations.length > 0 ? osmStations : stations.map((s) => ({ id: s.id, name: s.name, lat: s.lat, lng: s.lng }))).map((s, i) => {
+            // create a simple divIcon for the station label and place it slightly to the left
+            const labelHtml = `<div style="white-space:nowrap;color:#0EA5A3;font-weight:700;font-size:${mapMode === 'track' ? 11 : 12}px;text-shadow:0 1px 2px rgba(0,0,0,0.9);padding:0 6px;">${s.name}</div>`;
+            const labelIcon = L.divIcon({ html: labelHtml, className: 'station-label-div', iconSize: [180, 20], iconAnchor: [0, 10] });
+
+            // horizontal offset in degrees to move label left of the station symbol
+            const lngOffset = horizontal ? 0.0010 : 0.0006;
+
+            return (
+              <React.Fragment key={`st-${s.id}-${i}`}>
+                {/* station symbol using preset SVG icon */}
+                <Marker position={[s.lat, s.lng]} pane="stationPane" interactive={false} zIndexOffset={500} icon={stationIcon} />
+
+                {/* label marker (non-interactive) placed slightly left in stationPane so it renders above tracks */}
+                <Marker position={[s.lat, s.lng - lngOffset]} icon={labelIcon} pane="stationPane" interactive={false} zIndexOffset={2000} />
+
+                {/* show popup only in live mode on the station symbol */}
+                {mapMode === 'live' && (
+                  <Marker position={[s.lat, s.lng]} pane="stationPane" interactive={true} zIndexOffset={1500}>
+                    <Popup>
+                      <div>
+                        <strong>{s.name}</strong>
+                        <div>ID: {s.id}</div>
+                        <div>Lat: {s.lat.toFixed(6)}</div>
+                        <div>Lng: {s.lng.toFixed(6)}</div>
+                      </div>
+                    </Popup>
+                  </Marker>
+                )}
+              </React.Fragment>
+            );
+          })}
 
           {/* Signals from Overpass or synthetic mid-segment and trains (live mode only) */}
           {(() => {
