@@ -24,7 +24,7 @@ export default function Sidebar({
 }: SidebarProps) {
   return (
     <div
-      className={`fixed lg:sticky top-16 left-0 h-[calc(100vh-4rem)] bg-railway-card-bg border-r border-white/10 transition-transform duration-300 z-40 ${
+      className={`fixed lg:sticky top-16 left-0 h-[calc(100vh-4rem)] bg-railway-card-bg border-r border-white/10 transition-transform duration-300 z-[9999] ${
         sidebarOpen ? "translate-x-0 w-64" : "-translate-x-full lg:translate-x-0 lg:w-16"
       } overflow-auto`}
       aria-hidden={!sidebarOpen}
