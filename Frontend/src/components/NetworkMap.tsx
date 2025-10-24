@@ -219,6 +219,64 @@ out skel qt;`;
     return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
   }
 
+  // Deduplicate stations by rounding coordinates to avoid double labels
+  function dedupeStations(list: Array<{ id: string; name?: string; lat: number; lng: number }>) {
+    const seen = new Set<string>();
+    const out: Array<{ id: string; name?: string; lat: number; lng: number }> = [];
+    for (const s of list) {
+      const key = `${s.lat.toFixed(6)}|${s.lng.toFixed(6)}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        out.push(s);
+      }
+    }
+    return out;
+  }
+
+  // Find nearest segment index on route to point (lat,lng)
+  function nearestSegmentIndex(routePoints: [number, number][], lat: number, lng: number) {
+    let bestIdx = 0;
+    let bestDist = Infinity;
+    for (let i = 0; i < routePoints.length - 1; i++) {
+      const a = routePoints[i];
+      const b = routePoints[i + 1];
+      // project point onto segment (simple planar math, fine for small areas)
+      const ax = a[1], ay = a[0];
+      const bx = b[1], by = b[0];
+      const px = lng, py = lat;
+      const vx = bx - ax, vy = by - ay;
+      const wx = px - ax, wy = py - ay;
+      const c1 = vx * wx + vy * wy;
+      const c2 = vx * vx + vy * vy;
+      const t = c2 === 0 ? 0 : Math.max(0, Math.min(1, c1 / c2));
+      const projx = ax + vx * t;
+      const projy = ay + vy * t;
+      const dx = projx - px;
+      const dy = projy - py;
+      const distSq = dx * dx + dy * dy;
+      if (distSq < bestDist) {
+        bestDist = distSq;
+        bestIdx = i;
+      }
+    }
+    return bestIdx;
+  }
+
+  // Compute a small perpendicular offset (in degrees) to place labels beside the track
+  function labelPositionAlongSegment(a: [number, number], b: [number, number], lat: number, lng: number, distanceDeg = 0.00065) {
+    // segment vector (lng, lat)
+    const vx = b[1] - a[1];
+    const vy = b[0] - a[0];
+    // perpendicular (left side) = (-vy, vx)
+    const perpX = -vy;
+    const perpY = vx;
+    const len = Math.sqrt(perpX * perpX + perpY * perpY) || 1;
+    const ux = perpX / len;
+    const uy = perpY / len;
+    // label position
+    return [lat + uy * distanceDeg, lng + ux * distanceDeg] as [number, number];
+  }
+
   return (
     <div className={`w-full h-full ${size ? size : "min-h-[400px]"}`} style={wrapperStyle}>
       <div className="rounded-lg overflow-hidden border border-white/10 h-full">
@@ -268,39 +326,59 @@ out skel qt;`;
             ))
           )}
 
-          {/* Stations: use Overpass nodes if available, else markers from blueprint */}
-          {(osmStations && osmStations.length > 0 ? osmStations : stations.map((s) => ({ id: s.id, name: s.name, lat: s.lat, lng: s.lng }))).map((s, i) => {
-            // create a simple divIcon for the station label and place it slightly to the left
-            const labelHtml = `<div style="white-space:nowrap;color:#0EA5A3;font-weight:700;font-size:${mapMode === 'track' ? 11 : 12}px;text-shadow:0 1px 2px rgba(0,0,0,0.9);padding:0 6px;">${s.name}</div>`;
-            const labelIcon = L.divIcon({ html: labelHtml, className: 'station-label-div', iconSize: [180, 20], iconAnchor: [0, 10] });
+          {/* Stations: prefer Overpass nodes; dedupe nearby duplicates and compute perpendicular label offsets */}
+          {(() => {
+            const rawStations = (osmStations && osmStations.length > 0) ? osmStations : stations.map((s) => ({ id: s.id, name: s.name, lat: s.lat, lng: s.lng }));
+            const unique = dedupeStations(rawStations);
+            const placedNames = new Set<string>();
+            return unique.map((s, i) => {
+              // create label text and divIcon
+              const labelText = s.name || "";
+              // prevent rendering repeated identical labels at very close coordinates
+              const nameKey = `${labelText?.toLowerCase() || ''}:${s.lat.toFixed(5)}|${s.lng.toFixed(5)}`;
+              if (placedNames.has(nameKey)) return null;
+              placedNames.add(nameKey);
 
-            // horizontal offset in degrees to move label left of the station symbol
-            const lngOffset = horizontal ? 0.0010 : 0.0006;
+              // compute label position using nearest segment and perpendicular offset
+              let labelPos: [number, number] = [s.lat, s.lng];
+              if (route.length >= 2) {
+                const segIdx = Math.min(nearestSegmentIndex(route, s.lat, s.lng), Math.max(0, route.length - 2));
+                const a = route[segIdx];
+                const b = route[Math.min(segIdx + 1, route.length - 1)];
+                labelPos = labelPositionAlongSegment(a, b, s.lat, s.lng, horizontal ? 0.0012 : 0.00065);
+              } else {
+                // fallback small left offset
+                labelPos = [s.lat, s.lng - (horizontal ? 0.0010 : 0.0006)];
+              }
 
-            return (
-              <React.Fragment key={`st-${s.id}-${i}`}>
-                {/* station symbol using preset SVG icon */}
-                <Marker position={[s.lat, s.lng]} pane="stationPane" interactive={false} zIndexOffset={500} icon={stationIcon} />
+              const labelHtml = `<div style="white-space:nowrap;color:#0EA5A3;font-weight:700;font-size:${mapMode === 'track' ? 11 : 12}px;text-shadow:0 1px 2px rgba(0,0,0,0.9);padding:0 6px;">${labelText}</div>`;
+              const labelIcon = L.divIcon({ html: labelHtml, className: 'station-label-div', iconSize: undefined, iconAnchor: [0, 10] });
 
-                {/* label marker (non-interactive) placed slightly left in stationPane so it renders above tracks */}
-                <Marker position={[s.lat, s.lng - lngOffset]} icon={labelIcon} pane="stationPane" interactive={false} zIndexOffset={2000} />
+              return (
+                <React.Fragment key={`st-${s.id}-${i}`}>
+                  {/* station symbol using preset SVG icon */}
+                  <Marker position={[s.lat, s.lng]} pane="stationPane" interactive={false} zIndexOffset={500} icon={stationIcon} />
 
-                {/* show popup only in live mode on the station symbol */}
-                {mapMode === 'live' && (
-                  <Marker position={[s.lat, s.lng]} pane="stationPane" interactive={true} zIndexOffset={1500}>
-                    <Popup>
-                      <div>
-                        <strong>{s.name}</strong>
-                        <div>ID: {s.id}</div>
-                        <div>Lat: {s.lat.toFixed(6)}</div>
-                        <div>Lng: {s.lng.toFixed(6)}</div>
-                      </div>
-                    </Popup>
-                  </Marker>
-                )}
-              </React.Fragment>
-            );
-          })}
+                  {/* label marker (non-interactive) placed beside track in stationPane so it renders above tracks */}
+                  <Marker position={labelPos as any} icon={labelIcon} pane="stationPane" interactive={false} zIndexOffset={2000} />
+
+                  {/* show popup only in live mode on the station symbol */}
+                  {mapMode === 'live' && (
+                    <Marker position={[s.lat, s.lng]} pane="stationPane" interactive={true} zIndexOffset={1500}>
+                      <Popup>
+                        <div>
+                          <strong>{s.name}</strong>
+                          <div>ID: {s.id}</div>
+                          <div>Lat: {s.lat.toFixed(6)}</div>
+                          <div>Lng: {s.lng.toFixed(6)}</div>
+                        </div>
+                      </Popup>
+                    </Marker>
+                  )}
+                </React.Fragment>
+              );
+            });
+          })()}
 
           {/* Signals from Overpass or synthetic mid-segment and trains (live mode only) */}
           {(() => {
