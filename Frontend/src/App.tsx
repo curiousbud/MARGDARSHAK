@@ -207,7 +207,7 @@ export default function App() {
           setCurrentView={setCurrentView}
         />
     {/* Main Content */}
-    <Suspense fallback={<div className="flex-1 p-6">Loading...</div>}>
+  <Suspense fallback={<div className="flex-1 p-6 h-[calc(100vh-4rem)] flex items-center justify-center">Loading...</div>}>
       <div className="flex-1 p-4 md:p-6 overflow-y-auto h-[calc(100vh-4rem)]">
           {currentView === "dashboard" && (
             <div className="space-y-6">
