@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import { Button } from "../components/ui/button";
 import { Download, TrendingUp } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell } from "recharts";
+import { KPICards } from "../components/KPICards";
+import { ThroughputChart } from "../components/ThroughputChart";
 
 const delayByCategory = [
   { category: "Express", avgDelay: 3.2, count: 12 },
@@ -30,6 +32,13 @@ const hourlyStats = [
 export function PerformanceDashboard() {
   return (
     <div className="space-y-4">
+      <div>
+        <h2 className="text-2xl text-white">Real-Time Section Overview</h2>
+        <p className="text-sm text-railway-off-white">Live network monitoring and AI-driven insights</p>
+      </div>
+
+      <KPICards />
+      <ThroughputChart />
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl text-[#FAFAFA]">Performance Analytics</h2>

@@ -22,7 +22,7 @@ import {
   UserCircle,
   Shield,
 } from "lucide-react";
-import NetworkMapPage from "./pages/NetworkMapPage";
+import MapPage from "./pages/Map";
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { Badge } from "./components/ui/badge";
@@ -80,7 +80,7 @@ export default function App() {
 
   const navigationItems = [
     { id: "dashboard" as View, label: "Dashboard", icon: LayoutDashboard },
-    { id: "networkmap" as View, label: "Network Map", icon: Map },
+  { id: "networkmap" as View, label: "Map", icon: Map },
     { id: "conflicts" as View, label: "Conflict Resolution", icon: AlertTriangle },
     { id: "simulation" as View, label: "What-If Simulation", icon: FlaskConical },
     { id: "performance" as View, label: "Performance Analytics", icon: BarChart3 },
@@ -207,7 +207,7 @@ export default function App() {
           setCurrentView={setCurrentView}
         />
     {/* Main Content */}
-    <Suspense fallback={<div className="flex-1 p-6">Loading...</div>}>
+  <Suspense fallback={<div className="flex-1 p-6 h-[calc(100vh-4rem)] flex items-center justify-center">Loading...</div>}>
       <div className="flex-1 p-4 md:p-6 overflow-y-auto h-[calc(100vh-4rem)]">
           {currentView === "dashboard" && (
             <div className="space-y-6">
@@ -217,7 +217,7 @@ export default function App() {
 
           {currentView === "networkmap" && (
             <div className="space-y-6">
-              <NetworkMapPage />
+              <MapPage />
             </div>
           )}
 

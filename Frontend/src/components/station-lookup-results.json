@@ -1,0 +1,213 @@
+[
+  {
+    "query": "VIRAR",
+    "display_name": "Virar, Virar Skywalk, Virar East, Virar, Vasai-Virar, Vasai Taluka, Palghar, Maharashtra, 401303, India",
+    "lat": "19.4553059",
+    "lon": "72.8118160",
+    "type": "station"
+  },
+  {
+    "query": "Vaitarna",
+    "display_name": "Vaitarna, Mumbai - Vadodara Expressway, Vasai-Virar, Vasai Taluka, Palghar, Maharashtra, India",
+    "lat": "19.5186517",
+    "lon": "72.8499772",
+    "type": "station"
+  },
+  {
+    "query": "Saphale",
+    "display_name": "Saphale, MSH4, Saphale, Palghar Taluka, Palghar, Maharashtra, India",
+    "lat": "19.5771316",
+    "lon": "72.8218812",
+    "type": "station"
+  },
+  {
+    "query": "Kelve Road",
+    "display_name": "Kelve Road, Railfans' Zone, Kelva, Palghar Taluka, Palghar, Maharashtra, India",
+    "lat": "19.6240526",
+    "lon": "72.7911751",
+    "type": "station"
+  },
+  {
+    "query": "Palghar",
+    "display_name": "Palghar, Tembhode Road, Palghar, Palghar Taluka, Palghar, Maharashtra, 401404, India",
+    "lat": "19.6978882",
+    "lon": "72.7718888",
+    "type": "station"
+  },
+  {
+    "query": "Boisar",
+    "display_name": "Boisar, Boisar-Palghar Road, Boisar, Palghar Taluka, Palghar, Maharashtra, 401504, India",
+    "lat": "19.7984865",
+    "lon": "72.7614520",
+    "type": "station"
+  },
+  {
+    "query": "Vangaon",
+    "display_name": "Vangaon, SH31, Vangaon, Dahanu Taluka, Palghar, Maharashtra, 401103, India",
+    "lat": "19.8829908",
+    "lon": "72.7631658",
+    "type": "station"
+  },
+  {
+    "query": "Dahanu Road",
+    "display_name": "Dahanu Road, State Highway 30, Dahanu, Dahanu Taluka, Palghar, Maharashtra, 401600, India",
+    "lat": "19.9915236",
+    "lon": "72.7434083",
+    "type": "station"
+  },
+  {
+    "query": "Gholvad",
+    "display_name": "Gholvad, MSH4, Gholvad, Dahanu Taluka, Palghar, Maharashtra, 401702, India",
+    "lat": "20.0868248",
+    "lon": "72.7377410",
+    "type": "station"
+  },
+  {
+    "query": "Umbergaon Road",
+    "display_name": "Umbergaon Road, SH29, Umbargaon, Umbergaon Taluka, Valsad, Gujarat, 396170, India",
+    "lat": "20.1537655",
+    "lon": "72.7905804",
+    "type": "station"
+  },
+  {
+    "query": "Sanjan",
+    "display_name": "Sanjan, Amgoan Fatek, Umbergaon Taluka, Valsad, Gujarat, 396150, India",
+    "lat": "20.1922347",
+    "lon": "72.8210847",
+    "type": "station"
+  },
+  {
+    "query": "Bhilad",
+    "display_name": "Bhilad, SH5, Bhilad, Umbergaon Taluka, Valsad, Gujarat, 396155, India",
+    "lat": "20.2754926",
+    "lon": "72.8873250",
+    "type": "station"
+  },
+  {
+    "query": "Karambeli",
+    "display_name": "Karambeli, NH48, Karembali, Umbergaon Taluka, Valsad, Gujarat, 396105, India",
+    "lat": "20.3166250",
+    "lon": "72.9012366",
+    "type": "station"
+  },
+  {
+    "query": "Vapi",
+    "display_name": "Vapi, Daman Road, Vapi, Vapi Taluka, Valsad, Gujarat, 396191, India",
+    "lat": "20.3735482",
+    "lon": "72.9084376",
+    "type": "station"
+  },
+  {
+    "query": "Udvada",
+    "display_name": "Udvada, NH848B, Udvada village, Pardi Taluka, Valsad, Gujarat, 396185, India",
+    "lat": "20.4621395",
+    "lon": "72.9190049",
+    "type": "station"
+  },
+  {
+    "query": "Pardi",
+    "display_name": "Pardi, SH186, Pardi, Pardi Taluka, Valsad, Gujarat, 396020, India",
+    "lat": "20.5137936",
+    "lon": "72.9242196",
+    "type": "station"
+  },
+  {
+    "query": "Atul",
+    "display_name": "Atul, NH48, Valsad, Valsad Taluka, Valsad, Gujarat, 396007, India",
+    "lat": "20.5472816",
+    "lon": "72.9278239",
+    "type": "station"
+  },
+  {
+    "query": "Valsad",
+    "display_name": "Valsad, SH6, Valsad, Valsad Taluka, Valsad, Gujarat, 395125, India",
+    "lat": "20.6082083",
+    "lon": "72.9335048",
+    "type": "station"
+  },
+  {
+    "query": "Dungri",
+    "display_name": "Dungri, SH6, Dungri, Valsad Taluka, Valsad, Gujarat, 396385, India",
+    "lat": "20.6876797",
+    "lon": "72.9492412",
+    "type": "station"
+  },
+  {
+    "query": "Joravasan",
+    "display_name": "Joravasan",
+    "lat": "20.7307493",
+    "lon": "72.9661692",
+    "type": "halt",
+    "source": "osm"
+  },
+  {
+    "query": "Bilimora Junction",
+    "display_name": "Bilimora Junction, SH15, Bilimora, Gandevi Taluka, Navsari, Gujarat, 396380, India",
+    "lat": "20.7666352",
+    "lon": "72.9700083",
+    "type": "station"
+  },
+  {
+    "query": "Amalsad",
+    "display_name": "Amalsad, SH6;704, Amalsad, Gandevi Taluka, Navsari, Gujarat, 396310, India",
+    "lat": "20.8114158",
+    "lon": "72.9560202",
+    "type": "station"
+  },
+  {
+    "query": "Ancheli",
+    "display_name": "Ancheli, SH6;704, Ancheli, Gandevi Taluka, Navsari, Gujarat, 396406, India",
+    "lat": "20.8450701",
+    "lon": "72.9454102",
+    "type": "station"
+  },
+  {
+    "query": "Vedchha",
+    "display_name": "Vedchha, SH6;704, Jalalpore Taluka, Navsari, Gujarat, 396472, India",
+    "lat": "20.8746931",
+    "lon": "72.9360427",
+    "type": "station"
+  },
+  {
+    "query": "Navsari",
+    "display_name": "Navsari, Dandi Heritage Highway, Vijalpur, Eru, Jalalpore Taluka, Navsari, Gujarat, 396450, India",
+    "lat": "20.9481307",
+    "lon": "72.9130969",
+    "type": "station"
+  },
+  {
+    "query": "Maroli",
+    "display_name": "Maroli, SH195, Maroli, Jalalpore Taluka, Navsari, Gujarat, 396436, India",
+    "lat": "21.0200688",
+    "lon": "72.8904944",
+    "type": "station"
+  },
+  {
+    "query": "Sachin",
+    "display_name": "Sachin, Dandi Heritage Highway, Sachin, Chorasi Taluka, Surat, Gujarat, 394235, India",
+    "lat": "21.0778781",
+    "lon": "72.8744643",
+    "type": "station"
+  },
+  {
+    "query": "Bhestan",
+    "display_name": "Bhestan, SH6, GIDC, Majura Taluka, Surat, Gujarat, 395023, India",
+    "lat": "21.1225832",
+    "lon": "72.8630342",
+    "type": "station"
+  },
+  {
+    "query": "Udhna Junction",
+    "display_name": "Udhna Junction, Udhna Station Road, Udhana, Udhna Taluka, Surat, Gujarat, 394210, India",
+    "lat": "21.1704267",
+    "lon": "72.8509905",
+    "type": "station"
+  },
+  {
+    "query": "Surat",
+    "display_name": "Surat Railway Station, Sumul Dairy Road, Mini Bazar, Surat, Puna Taluka, Surat, Gujarat, 395003, India",
+    "lat": "21.2050338",
+    "lon": "72.8407079",
+    "type": "train_station"
+  }
+]
